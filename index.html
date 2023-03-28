@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Get User Location as Country</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel="stylesheet" href="./style.css">
+
+<script>
+    
+function add()
+{
+  var numOne, sum;
+  numOne = parseInt(document.getElementById("first").value);
+//  numTwo = parseInt(document.getElementById("second").value);
+  total = numOne * 0.00005753424 * 365 * 1000;
+  document.getElementById("answer").value = total;
+}
+</script>
+    
+    
+    
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div id="location">You are in ...</div>
+<!-- partial -->
+  <script type="module" src="./script.js"></script>
+    
+    
+    
+<p>How many hours are you using Internet in your daily routine?: <input id="first"></p>
+<!--<p>Enter the Second Number: <input id="second"></p>-->
+<button onclick="add()">Calculate Carbon Emission</button>
+<p>Total Annually CO2 Emission based on your daily internet usage = <input id="answer"> mkgCO2 </p>
+
+<a href="cert_index.html" target="_blank" class="button">Create Carbon Certificate</a>
+
+    
+    
+    
+
+</body>
+</html>

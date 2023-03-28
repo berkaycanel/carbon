@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+    <title>Minting Certificate</title>
+    <link rel="icon" href="images/icon-red.png" type="image/gif" sizes="16x16">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="Gigaland - NFT Marketplace Website Template" name="description" />
+    <meta content="" name="keywords" />
+    <meta content="" name="author" />
+    <!-- CSS Files
+    ================================================== -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel="stylesheet" href="./style4.css">
+
+
+</head>
+    
+    
+<body class="dark-scheme de-grey">
+
+    <div class="container">
+        <div class="center">
+            <p> <input type="file" id="input" multiple href="#" class="btn-main"></p>
+    
+        </div>
+    </div>
+    
+    <div class="flex-col space-y-2 justify-center items-center">
+        <button id='loginButton' onclick="" class="mx-auto rounded-md p-2 bg-purple-500 text-white">
+      Login with MetaMask
+        </button>
+        <p id='userWallet' class='text-lg text-gray-600 my-2'></p>
+    </div>
+
+</body>   
+    
+      
+     <div class="container">
+  <div class="center">     
+    <p><button onClick=easyMint() href="#" class="btn-main">Mint NFT</button></p>
+     </div>
+</div>
+     
+    
+<script>
+    
+ window.userWalletAddress = null
+    const loginButton = document.getElementById('loginButton')
+    const userWallet = document.getElementById('userWallet')
+
+    function toggleButton() {
+      if (!window.ethereum) {
+        loginButton.innerText = 'MetaMask is not installed'
+        loginButton.classList.remove('bg-purple-500', 'text-white')
+        loginButton.classList.add('bg-gray-500', 'text-gray-100', 'cursor-not-allowed')
+        return false
+      }
+
+      loginButton.addEventListener('click', loginWithMetaMask)
+    }
+
+    async function loginWithMetaMask() {
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
+        .catch((e) => {
+          console.error(e.message)
+          return
+        })
+      if (!accounts) { return }
+
+      window.userWalletAddress = accounts[0]
+      userWallet.innerText = window.userWalletAddress
+      loginButton.innerText = 'Sign out of MetaMask'
+
+      loginButton.removeEventListener('click', loginWithMetaMask)
+      setTimeout(() => {
+        loginButton.addEventListener('click', signOutOfMetaMask)
+      }, 200)
+    }
+
+    function signOutOfMetaMask() {
+      window.userWalletAddress = null
+      userWallet.innerText = ''
+      loginButton.innerText = 'Sign in with MetaMask'
+
+      loginButton.removeEventListener('click', signOutOfMetaMask)
+      setTimeout(() => {
+        loginButton.addEventListener('click', loginWithMetaMask)
+      }, 200)
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      toggleButton()
+    });
+        
+            
+        function easyMint()
+        {   
+          
+        const userWallet2 = document.getElementById('userWallet').innerHTML
+
+           console.log(userWallet2)
+            
+            
+            console.log("Easy Mint NFT")
+
+            const selectedFile = document.getElementById('input').files[0];
+
+            const data = new FormData();
+            data.append("file", selectedFile);
+
+            const xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+
+            xhr.addEventListener("readystatechange", function () {
+              if (this.readyState === this.DONE) {
+                console.log(this.responseText);
+                  alert(this.responseText)
+                
+              }
+            });
+
+           // xhr.open("POST", "https://api.nftport.xyz/v0/mints/easy/files?chain=polygon&name=Certificate&description=Carbon%20Certificate&mint_to_address=0x04dce8db1292a31367edad7f1b8a6bcc2b440fd2");
+            xhr.open("POST", "https://api.nftport.xyz/v0/mints/easy/files?chain=polygon&name=Certificate&description=Carbon%20Certificate&mint_to_address="+userWallet2);
+//            xhr.setRequestHeader("Content-Type", "multipart/form-data");
+            xhr.setRequestHeader("Authorization", "2c74a260-e0d4-44a2-a7f0-dfd4271b121c");
+
+            xhr.send(data);
+        }
+
+    
+   
+</script>
+    
+    
+    <script src="js/node_modules/requirejs/require.js"></script>
+    
+<head>
+    
+</head>
+
+<body>
+
+           <!-- footer begin -->
+      
+
+                                   
+    
+</body>
+
+</html>
